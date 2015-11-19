@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var oauthserver = require('./lib/oauth2server');
+var oauthserver = require('./public/javascripts/oauth2server');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -26,17 +26,21 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.oauth = oauthserver({
-  model: require('./lib/model'),
+  model: require('./public/javascripts/model'),
   grants: ['auth_code', 'password'],
   debug: true
 });
+
+/////////////
+// ROUTES
+/////////////
 
 app.use('/', routes);
 
 app.use('/users', users);
 
 // Handle token grant requests
-// TODO carry to routes
+// TODO carry to routes folder
 app.all('/oauth/token', app.oauth.grant());
 
 // Show them the "do you authorise xyz app to access your content?" page
@@ -126,7 +130,7 @@ if (app.get('env') === 'development') {
 }
 
 // Error handling
-// app.use(app.oauth.errorHandler()); // index.js used oauth error handler. Asses which one to use
+// app.use(app.oauth.errorHandler()); // oauth error handler. Asses which one to use
 
 // production error handler
 // no stacktraces leaked to user

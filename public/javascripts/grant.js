@@ -196,7 +196,7 @@ function useAuthCodeGrant (done) {
  *
  * @param  {Function} done
  */
-function usePasswordGrant (done) {
+function usePasswordGrant(done) {
   // User credentials
   var uname = this.req.body.username,
     pword = this.req.body.password;
@@ -222,7 +222,7 @@ function usePasswordGrant (done) {
  *
  * @param  {Function} done
  */
-function useRefreshTokenGrant (done) {
+function useRefreshTokenGrant(done) {
   var token = this.req.body.refresh_token;
 
   if (!token) {
@@ -263,7 +263,7 @@ function useRefreshTokenGrant (done) {
  *
  * @param  {Function} done
  */
-function useClientCredentialsGrant (done) {
+function useClientCredentialsGrant(done) {
   // Client credentials
   var clientId = this.client.clientId,
     clientSecret = this.client.clientSecret;
@@ -274,8 +274,7 @@ function useClientCredentialsGrant (done) {
   }
 
   var self = this;
-  return this.model.getUserFromClient(clientId, clientSecret,
-      function (err, user) {
+  return this.model.getUserFromClient(clientId, clientSecret, function (err, user) {
     if (err) return done(error('server_error', false, err));
     if (!user) {
       return done(error('invalid_grant', 'Client credentials are invalid'));

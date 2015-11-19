@@ -34,7 +34,7 @@ function AuthCodeGrant(config, req, res, next, check) {
   this.check = check;
 
   var self = this;
-  runner(fns, this, function (err) {
+  runner(fns, this, function(err) {
     if (err && res.oauthRedirect) {
       // Custom redirect error handler
       res.redirect(self.client.redirectUri + '?error=' + err.error +
@@ -53,7 +53,7 @@ function AuthCodeGrant(config, req, res, next, check) {
  * @param  {Function} done
  * @this   OAuth
  */
-function checkParams (done) {
+function checkParams(done) {
   var body = this.req.body;
   var query = this.req.query;
   if (!body && !query) return done(error('invalid_request'));
@@ -88,7 +88,7 @@ function checkParams (done) {
  * @param  {Function} done
  * @this   OAuth
  */
-function checkClient (done) {
+function checkClient(done) {
   var self = this;
   this.model.getClient(this.clientId, null, function (err, client) {
     if (err) return done(error('server_error', false, err));
@@ -119,7 +119,7 @@ function checkClient (done) {
  * @param  {Function} done
  * @this   OAuth
  */
-function checkUserApproved (done) {
+function checkUserApproved(done) {
   var self = this;
   this.check(this.req, function (err, allowed, user) {
     if (err) return done(error('server_error', false, err));
@@ -140,7 +140,7 @@ function checkUserApproved (done) {
  * @param  {Function} done
  * @this   OAuth
  */
-function generateCode (done) {
+function generateCode(done) {
   var self = this;
   token(this, 'authorization_code', function (err, code) {
     self.authCode = code;
@@ -154,7 +154,7 @@ function generateCode (done) {
  * @param  {Function} done
  * @this   OAuth
  */
-function saveAuthCode (done) {
+function saveAuthCode(done) {
   var expires = new Date();
   expires.setSeconds(expires.getSeconds() + this.config.authCodeLifetime);
 
@@ -171,7 +171,7 @@ function saveAuthCode (done) {
  * @param  {Function} done
  * @this   OAuth
  */
-function redirect (done) {
+function redirect(done) {
   this.res.redirect(this.client.redirectUri + '?code=' + this.authCode +
       (this.req.query.state ? '&state=' + this.req.query.state : ''));
 

@@ -10,7 +10,7 @@ module.exports = OAuth2Server;
  *
  * @param {Object} config Configuration object
  */
-function OAuth2Server (config) {
+function OAuth2Server(config) {
 
   if (!(this instanceof OAuth2Server)) return new OAuth2Server(config);
 
@@ -47,10 +47,10 @@ function OAuth2Server (config) {
  *
  * @return {Function} middleware
  */
-OAuth2Server.prototype.authorise = function () {
+OAuth2Server.prototype.authorise = function() {
   var self = this;
 
-  return function (req, res, next) {
+  return function(req, res, next) {
     return new Authorise(self, req, next);
   };
 };
@@ -65,7 +65,7 @@ OAuth2Server.prototype.authorise = function () {
  *
  * @return {Function} middleware
  */
-OAuth2Server.prototype.grant = function () {
+OAuth2Server.prototype.grant = function() {
   var self = this;
 
   return function (req, res, next) {
@@ -80,7 +80,7 @@ OAuth2Server.prototype.grant = function () {
  *                          user has authorised the request.
  * @return {Function}       middleware
  */
-OAuth2Server.prototype.authCodeGrant = function (check) {
+OAuth2Server.prototype.authCodeGrant = function(check) {
   var self = this;
 
   return function (req, res, next) {
@@ -96,10 +96,10 @@ OAuth2Server.prototype.authCodeGrant = function (check) {
  *
  * @return {Function} middleware
  */
-OAuth2Server.prototype.errorHandler = function () {
+OAuth2Server.prototype.errorHandler = function() {
   var self = this;
 
-  return function (err, req, res, next) {
+  return function(err, req, res, next) {
     if (!(err instanceof error) || self.passthroughErrors) return next(err);
 
     delete err.name;
@@ -118,9 +118,9 @@ OAuth2Server.prototype.errorHandler = function () {
 /**
  * Lockdown
  *
- * When using the lockdown patter, this function should be called after
+ * When using the lockdown pattern, this function should be called after
  * all routes have been declared.
- * It will search through each route and if it has not been explitly bypassed
+ * It will search through each route and if it has not been explicitly bypassed
  * (by passing oauth.bypass) then authorise will be inserted.
  * If oauth.grant has been passed it will replace it with the proper grant
  * middleware
@@ -154,7 +154,7 @@ OAuth2Server.prototype.lockdown = function (app) {
       return;
     }
 
-    // Check it's not been explitly bypassed
+    // Check it's not been explicitly bypassed
     pos = stack.indexOf(self.bypass);
     if (pos === -1) {
       stack.unshift(self.authorise());
@@ -213,4 +213,4 @@ OAuth2Server.prototype.lockdown = function (app) {
  *
  * @return {Function} noop
  */
-OAuth2Server.prototype.bypass = function () {};
+OAuth2Server.prototype.bypass = function(){};
