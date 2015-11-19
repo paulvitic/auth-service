@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var oauthserver = require('./public/javascripts/oauth2server');
+var oauthserver = require('./lib/oauth2server');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -26,7 +26,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.oauth = oauthserver({
-  model: require('./public/javascripts/model'),
+  model: require('./lib/model'),
   grants: ['auth_code', 'password'],
   debug: true
 });
