@@ -1,13 +1,16 @@
 var express = require('express');
 var path = require('path');
+var session = require('express-session');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var oauthserver = require('./lib/oauth2server');
 
+// routes
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var login = require('./routes/login');
 
 var app = express();
 
@@ -15,32 +18,34 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-// uncomment after placing your favicon in /public
+// uncomment after placing favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-
 app.use(bodyParser.urlencoded({ extended: true }));
-//app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: true
+}));
+
 app.use(express.static(path.join(__dirname, 'public')));
 
+// get oauthserver
 app.oauth = oauthserver({
   model: require('./lib/model'),
   grants: ['auth_code', 'password'],
   debug: true
 });
 
-/////////////
-// ROUTES
-/////////////
-
+// routing
 app.use('/', routes);
-
 app.use('/users', users);
+app.use('/login', login);
 
+// TODO carry to routes to routes folder
 // Handle token grant requests
-// TODO carry to routes folder
 app.all('/oauth/token', app.oauth.grant());
 
 // Show them the "do you authorise xyz app to access your content?" page
@@ -71,32 +76,6 @@ app.post('/oauth/authorise', function (req, res, next) {
   // The third param should for the user/uid (only used for passing to saveAuthCode)
   next(null, req.body.allow === 'yes', req.session.user.id, req.session.user);
 }));
-
-// Show login
-app.get('/login', function (req, res, next) {
-  res.render('login', {
-    redirect: req.query.redirect,
-    client_id: req.query.client_id,
-    redirect_uri: req.query.redirect_uri
-  });
-});
-
-// Handle login
-app.post('/login', function (req, res, next) {
-  // Insert your own login mechanism
-  if (req.body.email !== 'thom@nightworld.com') {
-    res.render('login', {
-      redirect: req.body.redirect,
-      client_id: req.body.client_id,
-      redirect_uri: req.body.redirect_uri
-    });
-  } else {
-    // Successful logins should send the user back to the /oauth/authorise
-    // with the client_id and redirect_uri (you could store these in the session)
-    return res.redirect((req.body.redirect || '/home') + '?client_id=' +
-        req.body.client_id + '&redirect_uri=' + req.body.redirect_uri);
-  }
-});
 
 app.get('/secret', app.oauth.authorise(), function (req, res) {
   // Will require a valid access_token
