@@ -5,7 +5,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var oauthserver = require('./lib/oauth2server');
+var oauthserver = require('oauth2-server');
 
 // routes
 var routes = require('./routes/index');
