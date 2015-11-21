@@ -1,2 +1,25 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<h1>Authentication and Authorization Service demo</h1>
+
+<p>
+    You can emulate a client application by appending the URL path. <br/>
+    The appended path will be considered as the client application id. <br/>
+    Accessing any sub-path starting with "secret" is protected and requires an authentication token.
+</p>
+
+<h2>Example:</h2>
+
+<code>
+    [host]/xyz
+</code>
+
+<p>
+    emulates the domain of <em>xyz</em> application and
+</p>
+
+<code>
+    [host]/xyz/secret/page
+</code>
+
+<p>
+    emulates the protected <em>page</em> resource of <em>xyz</em> application.
+</p>

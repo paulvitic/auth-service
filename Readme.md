@@ -1,20 +1,6 @@
-# PostgreSQL Example
+# OAuth2
 
-See schema.sql for the tables referred to in this example
-
-The object exposed in model.js could be directly passed into the model parameter of the config object when initiating.
-
-For example:
-
-```js
-
-var oauth = oauthserver({
-  model: require('./model'),
-  grants: ['password'],
-  debug: true
-});
-
-```
+Read [OAuth 2.0 Tutorial](http://tutorials.jenkov.com/oauth2/index.html)
 
 ## Start
 

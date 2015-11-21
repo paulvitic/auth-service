@@ -62,8 +62,12 @@ model.getRefreshToken = function (bearerToken, callback) {
   });
 };
 
+model.revokeRefreshToken = function (refreshToken, callback) {
+  // TODO implement
+};
+
 // This will very much depend on your setup, I wouldn't advise doing anything exactly like this but
-// it gives an example of how to use the method to resrict certain grant types
+// it gives an example of how to use the method to restrict certain grant types
 var authorizedClientIds = ['abc1', 'def2'];
 model.grantTypeAllowed = function (clientId, grantType, callback) {
   if (grantType === 'password') {
@@ -109,4 +113,35 @@ model.getUser = function (username, password, callback) {
       done();
     });
   });
+};
+
+
+/*
+ * Required for authorization_code grant type
+ */
+model.getAuthCode = function(authCode, callback) {
+  //TODO implement
+};
+
+model.saveAuthCode = function(authCode, clientId, expires, user, callback){
+  //TODO implement
+};
+
+/*
+ * Required for client_credentials grant type
+ */
+model.getUserFromClient = function(clientId, clientSecret, callback){
+  //TODO implement
+};
+
+/*
+ * Required for extension grant grant type
+ */
+model.extendedGrant = function(grantType, req, callback){
+  //TODO implement
+};
+
+
+model.generateToken = function(type, req, callback){
+  //TODO implement
 };
