@@ -122,7 +122,21 @@ model.getUser = function (username, password, callback) {
  * Required for authorization_code grant type
  */
 model.getAuthCode = function(authCode, callback) {
-  //TODO implement
+    pg.connect(connString, function (err, client, done) {
+        if (err) return callback(err);
+        client.query('SELECT auth_code, client_id, expires, user_id FROM oauth_auth_codes ' +
+            'WHERE auth_code = $1', [authCode], function (err, result) {
+            if (err || !result.rowCount) return callback(err);
+            var code = result.rows[0];
+            callback(null, {
+                authCode: code.auth_code,
+                clientId: code.client_id,
+                expires: code.expires,
+                userId: code.user_id
+            });
+            done();
+        });
+    });
 };
 
 model.saveAuthCode = function(authCode, clientId, expires, userId, callback){

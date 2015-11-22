@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.oauth = oauthserver({
     model: require('./service/model'),
     // supports authorization_code, password, refresh_token, client_credentials and extension grant types.
-    grants: ['auth_code', 'password'],
+    grants: ['authorization_code', 'password'],
     debug: true,
     continueAfterResponse: true
 });
