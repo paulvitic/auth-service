@@ -93,7 +93,7 @@ a img {
  * Set Variables
  */
 body {
-  font-family: 'Arial';
+    font-family: 'Arial', sans-serif;
   font-size: 14px;
   background-color: #f4f4f4;
   color: #444;
@@ -138,7 +138,8 @@ header .smavaLogo {
 }
 .main-content {
   float: left;
-  width: 70%;
+  /*width: 70%;*/
+  width: 100%;
 }
 .main-content p {
   margin-bottom: 20px;
@@ -146,7 +147,6 @@ header .smavaLogo {
 .sidebar {
   float: right;
   width: 27%;
-  height: 100%;
 }
 .sidebar .block {
   -webkit-border-radius: 5px;
@@ -160,8 +160,8 @@ header .smavaLogo {
   margin: 13px 10px 4px;
   padding-bottom: 10px;
   border-bottom: 1px dotted #ddd;
-  -webkit-border-radius: 2px 2px 0px 0px;
-  border-radius: 2px 2px 0px 0px;
+  -webkit-border-radius: 2px 2px 0 0;
+  border-radius: 2px 2px 0 0;
   margin-bottom: 10px;
 }
 p {
