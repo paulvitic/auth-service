@@ -1,6 +1,10 @@
 <div class="login-block">
     <h1>Login</h1>
-    <input type="text" value="" placeholder="Username" id="username" />
-    <input type="password" value="" placeholder="Password" id="password" />
-    <button>Submit</button>
+    <form method="post">
+        <input type="text" value="" placeholder="Username" id="username" name="username"/>
+        <input type="password" value="" placeholder="Password" id="password" name="password"/>
+        <input type="text" value="{{client_id}}" name="clientId" hidden="hidden"/>
+        <input type="text" value="{{redirect_uri}}" name="redirectUri" hidden="hidden"/>
+        <button type="submit" value="Submit">Submit</button>
+    </form>
 </div>

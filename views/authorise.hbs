@@ -1,1 +1,8 @@
-<p>do you authorise xyz app to access your content?</p>
+<div class="login-block">
+    <form method="post">
+        <h3>Authorise {{client_id}} app to access your content?</h3>
+        <input type="text" value="code" name="response_type" hidden="hidden"/>
+        <button name="allow" type="submit" value="yes">YES</button>
+        <button name="allow" type="submit" value="no">NO</button>
+    </form>
+</div>

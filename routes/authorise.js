@@ -6,8 +6,8 @@ module.exports = function (oauth) {
     router.get('/', function (req, res, next) {
         if (!req.session.user) {
             // If they aren't logged in, send them to your own login implementation
-            return res.redirect('/login?redirect=' + req.path + '&client_id=' +
-                req.query.client_id + '&redirect_uri=' + req.query.redirect_uri);
+            return res.redirect('/login?client_id=' + req.query.client_id +
+                '&redirect_uri=' + req.query.redirect_uri);
         }
 
         res.render('authorise', {

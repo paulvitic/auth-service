@@ -43,7 +43,8 @@ model.getClient = function (clientId, clientSecret, callback) {
       // This object will be exposed in req.oauth.client
       callback(null, {
         clientId: client.client_id,
-        clientSecret: client.client_secret
+        clientSecret: client.client_secret,
+        redirectUri: client.redirect_uri
       });
       done();
     });
@@ -125,6 +126,7 @@ model.getAuthCode = function(authCode, callback) {
 
 model.saveAuthCode = function(authCode, clientId, expires, user, callback){
   //TODO implement
+    callback();
 };
 
 /*
@@ -138,10 +140,5 @@ model.getUserFromClient = function(clientId, clientSecret, callback){
  * Required for extension grant grant type
  */
 model.extendedGrant = function(grantType, req, callback){
-  //TODO implement
-};
-
-
-model.generateToken = function(type, req, callback){
   //TODO implement
 };

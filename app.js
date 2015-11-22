@@ -30,7 +30,8 @@ app.oauth = oauthserver({
     model: require('./service/model'),
     // supports authorization_code, password, refresh_token, client_credentials and extension grant types.
     grants: ['auth_code', 'password'],
-    debug: true
+    debug: true,
+    continueAfterResponse: true
 });
 
 // grant types constant
@@ -43,7 +44,6 @@ app.locals.grantTypes = {
 };
 
 // routes
-app.use('/mngnt', require('./routes/mngnt'));
 app.use('/login', require('./routes/login'));
 app.use('/oauth/token', require('./routes/token')(app.oauth));
 app.use('/oauth/authorise', require('./routes/authorise')(app.oauth));
