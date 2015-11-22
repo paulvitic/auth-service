@@ -67,15 +67,16 @@ model.revokeRefreshToken = function (refreshToken, callback) {
   // TODO implement
 };
 
-// This will very much depend on your setup, I wouldn't advise doing anything exactly like this but
-// it gives an example of how to use the method to restrict certain grant types
-var authorizedClientIds = ['abc1', 'def2'];
 model.grantTypeAllowed = function (clientId, grantType, callback) {
-  if (grantType === 'password') {
-    return callback(false, authorizedClientIds.indexOf(clientId.toLowerCase()) >= 0);
-  }
-
-  callback(false, true);
+    pg.connect(connString, function (err, client, done) {
+        if (err) return callback(err);
+        client.query('SELECT * FROM oauth_client_grant_types ' +
+            'WHERE client_id = $1 AND grant_type = $2', [clientId, grantType], function (err, result) {
+            // The returned user_id will be exposed in req.user.id
+            callback(err, result.rowCount ? result.rows[0] : false);
+            done();
+        });
+    });
 };
 
 model.saveAccessToken = function (accessToken, clientId, expires, userId, callback) {
@@ -124,9 +125,16 @@ model.getAuthCode = function(authCode, callback) {
   //TODO implement
 };
 
-model.saveAuthCode = function(authCode, clientId, expires, user, callback){
-  //TODO implement
-    callback();
+model.saveAuthCode = function(authCode, clientId, expires, userId, callback){
+    pg.connect(connString, function (err, client, done) {
+        if (err) return callback(err);
+        client.query('INSERT INTO oauth_auth_codes(auth_code, client_id, user_id, expires) ' +
+            'VALUES ($1, $2, $3, $4)', [authCode, clientId, userId, expires],
+            function (err, result) {
+                callback(err);
+                done();
+            });
+    });
 };
 
 /*

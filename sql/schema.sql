@@ -60,6 +60,15 @@ CREATE TABLE oauth_clients (
     redirect_uri text NOT NULL
 );
 
+--
+-- Name: oauth_client_grant_types; Type: TABLE; Schema: public; Owner: -; Tablespace:
+--
+
+CREATE TABLE oauth_client_grant_types (
+  client_id text NOT NULL,
+  grant_type text NOT NULL
+);
+
 
 --
 -- Name: oauth_refresh_tokens; Type: TABLE; Schema: public; Owner: -; Tablespace: 
