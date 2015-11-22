@@ -39,6 +39,16 @@ CREATE TABLE oauth_access_tokens (
     expires timestamp without time zone NOT NULL
 );
 
+--
+-- Name: oauth_auth_codes; Type: TABLE; Schema: public; Owner: -; Tablespace:
+--
+
+CREATE TABLE oauth_auth_codes (
+    auth_code text NOT NULL,
+    client_id text NOT NULL,
+    user_id uuid NOT NULL,
+    expires timestamp without time zone NOT NULL
+);
 
 --
 -- Name: oauth_clients; Type: TABLE; Schema: public; Owner: -; Tablespace: 
