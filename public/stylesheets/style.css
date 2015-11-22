@@ -66,9 +66,10 @@ td {
   vertical-align: baseline;
 }
 body {
-  line-height: 1;
-  color: #000;
-  background: #fff;
+    font-family: 'Arial';
+    font-size: 14px;
+    background-color: #f4f4f4;
+    color: #444;
 }
 ol,
 ul {
@@ -89,15 +90,7 @@ td {
 a img {
   border: none;
 }
-/*
- * Set Variables
- */
-body {
-  font-family: 'Arial';
-  font-size: 14px;
-  background-color: #f4f4f4;
-  color: #444;
-}
+
 h1 {
   font-size: 20px;
   line-height: 1.8em;
@@ -112,6 +105,25 @@ header {
   margin-bottom: 20px;
   background-color: #333;
 }
+
+header a.smavaLogo {
+    background-image: url('/images/smava_logo_no_claim_nonretina.png');
+}
+
+header .smavaLogo {
+    float: left;
+}
+
+header .smavaLogo {
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: 200px 53px;
+    height: 53px;
+    width: 210px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
 .container {
   width: 80%;
   margin: auto;
