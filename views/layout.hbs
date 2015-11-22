@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>{{title}}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <header>
+    <head>
+        <title>{{title}}</title>
+        <link rel='stylesheet' href='/stylesheets/style.css'/>
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <a class="smavaLogo" href="/"></a>
+            </div>
+        </header>
         <div class="container">
-            <a class="smavaLogo" href="/">
-            </a>
-            <h1>{{title}}</h1>
+            <div class="main-content">
+                {{{body}}}
+            </div>
+            <div class="sidebar">
+                <div class="block">
+                    <h1>Sidebar</h1>
+                    {{{sidebar}}}
+                </div>
+            </div>
+            <div class="container">
+                <footer>
+                    <p>Copyright &copy; 2015</p>
+                </footer>
+            </div>
         </div>
-    </header>
-      <div class="container">
-          <div class="main-content">
-              {{{body}}}
-          </div>
-      </div>
-  </body>
+    </body>
 </html>
