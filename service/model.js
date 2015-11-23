@@ -49,7 +49,8 @@ model.getAccessToken = function (bearerToken, callback) {
                         userId: token.userId
                     });
                     done();
-                });
+                }
+            );
         });
     }
 };
@@ -70,8 +71,6 @@ model.getClient = function (clientId, clientSecret, callback) {
                 }
 
                 var client = result.rows[0];
-
-
                 if (clientSecret !== null && client.client_secret !== clientSecret) {
                     return callback();
                 }
@@ -83,7 +82,8 @@ model.getClient = function (clientId, clientSecret, callback) {
                     redirectUri: client.redirect_uri
                 });
                 done();
-            });
+            }
+        );
     });
 };
 
@@ -136,7 +136,8 @@ model.saveAccessToken = function (accessToken, clientId, expires, userId, callba
             function (err) {
                 callback(err);
                 done();
-            });
+            }
+        );
     });
 };
 
@@ -151,7 +152,8 @@ model.saveRefreshToken = function (refreshToken, clientId, expires, userId, call
             function (err) {
                 callback(err);
                 done();
-            });
+            }
+        );
     });
 };
 
@@ -211,7 +213,8 @@ model.saveAuthCode = function (authCode, clientId, expires, userId, callback) {
             function (err) {
                 callback(err);
                 done();
-            });
+            }
+        );
     });
 };
 
