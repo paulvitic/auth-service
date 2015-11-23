@@ -1,7 +1,4 @@
 /*global describe, it, require */
-/** @namespace result.cached.should */
-/** @namespace result.cached.should.be */
-/** @namespace result.cached.should.be.true */
 'use strict';
 
 require('should');

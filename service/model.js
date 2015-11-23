@@ -1,10 +1,3 @@
-/** @namespace process.env.DATABASE_URL */
-/** @namespace token.access_token */
-/** @namespace result.rowCount */
-/** @namespace client.client_secret */
-/** @namespace code.user_id */
-/** @namespace code.auth_code */
-
 'use strict';
 var pg = require('pg');
 var model = module.exports;
