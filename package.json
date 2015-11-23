@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "source ./bin/app.env && node ./bin/www"
+    "start": "source ./bin/app.env && node ./bin/www",
+    "test": "source ./bin/app.env && mocha --require should --reporter spec --ui bdd --recursive"
   },
   "dependencies": {
     "basic-auth": "~0.0.1",
